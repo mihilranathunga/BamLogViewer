@@ -8,14 +8,14 @@
   var toTime = request.getParameter('toTime');
   var limit = request.getParameter('limit');
 
-log.info("filekey: "+filekey+" ,hostIP: "+hostIP+" ,fromTime: "+fromTime+" ,to Time: "+toTime+" ,limit: "+limit);
+  log.info("filekey: "+filekey+" ,hostIP: "+hostIP+" ,fromTime: "+fromTime+" ,to Time: "+toTime+" ,limit: "+limit);
 
 /*  var carbon = require('carbon');
   var usrconf = carbon.server.loadConfig('user-mgt.xml');
   var adminUser = usrconf.*::['Realm'].*::['Configuration'].*::['AdminUser'].*::['UserName'].text();
   var adminPassword = usrconf.*::['Realm'].*::['Configuration'].*::['AdminUser'].*::['Password'].text()
 
-log.info(adminUser+" , "+ adminPassword);*/
+  log.info(adminUser+" , "+ adminPassword);*/
 
 // new filekey code
 
@@ -27,7 +27,7 @@ if(filekey =="All"){
 else{
   if(filekey != null | filekey != ""){
 
-  filekey = filekey;
+    filekey = filekey;
   }
   else{
     filekey = "";
@@ -41,9 +41,9 @@ if(fromTime == "All"){
   fromTime = 0;
 }
 else{
-    if(fromTime != null && fromTime != ""){
+  if(fromTime != null && fromTime != ""){
 
-  fromTime = (new Date(fromTime)).getTime();
+    fromTime = (new Date(fromTime)).getTime();
   }
   else{
     fromTime = 0;
@@ -55,12 +55,12 @@ if(toTime == "All"){
   toTime = (new Date()).getTime();
 }
 else{
-   if(toTime != null && toTime != ""){
+ if(toTime != null && toTime != ""){
    toTime = (new Date(toTime)).getTime();
-   }
-   else{
-     toTime = (new Date()).getTime();
-   }
+ }
+ else{
+   toTime = (new Date()).getTime();
+ }
 }
 
 if(limit == "All"){
@@ -71,87 +71,94 @@ if(hostIP != null ){
   
   if(hostIP.length > 5){
 
-      var comp = Packages.compactor;
+    var comp = Packages.compactor;
 
-      var viewer =  new comp.LogCompactor();
+    var viewer =  new comp.LogCompactor();
 
-      var result =JSON.parse(String(viewer.getData(hostIP,filekey,String(fromTime),String(toTime),limit).toString()));
+    var result = null;
 
-      result.sort(function(a, b){
+    try{
+      result =JSON.parse(String(viewer.getData(hostIP,filekey,String(fromTime),String(toTime),limit).toString()));
+    }catch(e){
+
+     log.error(e.toString());
+   }
+
+   result.sort(function(a, b){
 
     //    log.info("\""+a.timestamp+"\"  : \""+b.timestamp+"\"");
 
-        var aDate = a.timestamp;
-        var bDate = b.timestamp;
+    var aDate = a.timestamp;
+    var bDate = b.timestamp;
 
    //     log.info("a = "+String(aDate)+" , b= "+String(bDate));
 
-         if (aDate < bDate){
+   if (aDate < bDate){
    //       log.info("small");
-          return -1;
-        }
-         if (aDate > bDate){
+   return -1;
+ }
+ if (aDate > bDate){
     //      log.info("large");
-            return 1;
-          }
+    return 1;
+  }
    //       log.info("same");
-        return 0;
+   return 0;
 
-      });
+ });
       //log.info(stringify(result));
       
     }  
-}
+  }
 
 
 
-function emptyList()
-{
+  function emptyList()
+  {
     var dataAvailable = "<font color='red'>Could not find any log entries!</font>";
 
-         print("<tr>");
-         print("<td></td>");
-         print("<td></td>");
-         print("<td style='line-height:150px;'>"+dataAvailable+"</td>"); 
-         print("<td></td>");                                                                           
-         print("</tr>");
+    print("<tr>");
+    print("<td></td>");
+    print("<td></td>");
+    print("<td style='line-height:150px;'>"+dataAvailable+"</td>"); 
+    print("<td></td>");                                                                           
+    print("</tr>");
 
-}
+  }
 
 
-function showAll()
-{
-   print("<thead><tr><th>file key</th><th>Host Ip</th><th>Log Message</th><th>Logged Time</th></tr></thead><tbody>");
-  
-
-  if(result==null || result.length == 0)
+  function showAll()
   {
+   print("<thead><tr><th>file key</th><th>Host Ip</th><th>Log Message</th><th>Logged Time</th></tr></thead><tbody>");
+   
+
+   if(result==null || result.length == 0)
+   {
     log.info("result is empty!");
-      emptyList();    
+    emptyList();    
   }
   else
   {
 
-        for each (var l in result) { 
+    for each (var l in result) { 
 
-         print("<tr>");
-         print("<td>"+l.filekey+"</td>");
-         print("<td>"+l.host_ip+"</td>");
-         print("<td>"+l.log+"</td>");
-         print("<td>"+l.time+"</td>");                                                                           
-         print("</tr>");
+     print("<tr>");
+     print("<td>"+l.filekey+"</td>");
+     print("<td>"+l.host_ip+"</td>");
+     print("<td>"+l.log+"</td>");
+     print("<td>"+l.time+"</td>");                                                                           
+     print("</tr>");
 
-        }
-    }    
+   }
+ }    
 
-  print("</tbody>");
+ print("</tbody>");
 }
 
 
 
- var page = 1;
+var page = 1;
 
-   %>
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -164,21 +171,21 @@ function showAll()
 <table class="table table-bordere" style="width:94%; empty-cells:hide; border-collapse: collapse">
 
 
-        <% 
+<% 
 
-            showAll();
-                       
-           
-        %>
+showAll();
 
-    
+
+%>
+
+
 
 </table>
 
 
 
 <div id="errorInfo"></div>
-   
+
 <br>
 <br>
 
@@ -187,8 +194,8 @@ function showAll()
 
 <style type="text/css">
 body{
-font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-background-color: white;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  background-color: white;
 }
 #bar-chart-simple{
   width:94%;
