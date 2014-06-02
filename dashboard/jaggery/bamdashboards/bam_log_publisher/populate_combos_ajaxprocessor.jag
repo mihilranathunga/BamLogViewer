@@ -34,7 +34,7 @@
     result =parse(String(viewer.getFileKeyList(host_ip).toString()));
     }catch(e){
 
-    log.error(e.toString());
+     log.error(e.javaException.getMessage());
     }
 
     log.info("populate Filekeys"+stringify(result));
@@ -55,7 +55,7 @@
 
     }catch(e){
 
-    log.error(e.toString());
+     log.error(e.javaException.getMessage());
     }
 
     log.info("populate ips"+stringify(result));

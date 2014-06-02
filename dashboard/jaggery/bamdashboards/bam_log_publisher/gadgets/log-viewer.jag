@@ -81,7 +81,7 @@ if(hostIP != null ){
       result =JSON.parse(String(viewer.getData(hostIP,filekey,String(fromTime),String(toTime),limit).toString()));
     }catch(e){
 
-     log.error(e.toString());
+     log.error(e.getMessage);
    }
 
    result.sort(function(a, b){
@@ -128,7 +128,7 @@ if(hostIP != null ){
 
   function showAll()
   {
-   print("<thead><tr><th>file key</th><th>Host Ip</th><th>Log Message</th><th>Logged Time</th></tr></thead><tbody>");
+   print("<thead><tr><th style='width:10%'>file key</th><th style='width:10%'>Host Ip</th><th style='width:65%'>Log Message</th><th style:'width=15%'>Logged Time</th></tr></thead><tbody>");
    
 
    if(result==null || result.length == 0)
@@ -168,28 +168,17 @@ var page = 1;
 </head>
 <body>
 
-<table class="table table-bordere" style="width:94%; empty-cells:hide; border-collapse: collapse">
+<div class="row" style="width:99%">
+ <div class="col-lg-12">
 
+    <table class="table table-bordere" style="width:100%; table-layout: fixed; word-wrap: break-word; empty-cells:hide; border-collapse: collapse">
+        <% 
+          showAll();
+        %>
+    </table>
 
-<% 
-
-showAll();
-
-
-%>
-
-
-
-</table>
-
-
-
-<div id="errorInfo"></div>
-
-<br>
-<br>
-
-
+  </div>
+</div>
 
 
 <style type="text/css">

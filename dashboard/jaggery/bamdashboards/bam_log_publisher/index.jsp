@@ -19,6 +19,7 @@
     }.pagination-centered {
       text-align: center;
     }
+
     </style>
 
     <link rel="stylesheet" href="../resources/css/main.css">
@@ -31,7 +32,7 @@
 
     <div id="wrap">
       <div class="navbar navbar-inverse navbar-fixed-top main-menu">
-        <div class="container">
+        <div class="container" style="max-width: 95%;">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="icon-bar"></span>
@@ -46,112 +47,90 @@
           </div>
           <!--/.navbar-collapse -->
         </div>
-        <div class="breadcrumb-strip">
-          <div class="container">
-            <!-- Example row of columns -->
-                <!-- div class="row">
-                    <div class="col-lg-12">
+      </div>
 
-                        <ul class="breadcrumb pull-left">
-                            <li><a href="../../../carbon">BAM Console</a> <span class="divider"></span></li>
-                            <li class="active">WSO2 Private PaaS Logs</li>
-                        </ul>
-                       
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+
+
+            <!--img border="25%"  src="logo-inside.png" alt="WSO2 Private PAAS" align="left" -->  
+
+            <h1>BAM Log Client Logs</h1>
+
+            <div class="container content-section">
+
+
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="well topFilteringPanel">
+                   <div class="row">
+                     <div class="col-lg-12">
+                      <span class="span4">Select HostAddress :
+                        <select id="cluster-dd" name="basic-combo">
+                          <option>All</option>
+                        </select>
+                      </span>
+                      &nbsp;&nbsp;&nbsp;
+
+                      <span class="span4">Select FileKey :
+                        <select id="type-dd" name="basic-combo">
+                          <option>All</option>
+                        </select>
+                      </span>
+
+                      &nbsp;&nbsp;&nbsp;
+
+
+                      <span class="span4">Limit :
+                        <select id="limit-dd" name="basic-combo">
+                          <option>Def</option>
+                        </select>
+                      </span>
+
+                      &nbsp;&nbsp;&nbsp;
+
+                      <button id="clearSelectionBtn" class="btn btn-primary btn-small filter-btn">Clear</button>
                     </div>
-                  </div -->
+                  </div>
+                  <div class="row">
+                   <div class="col-lg-12">
+                    <span id="date-select" class="span4">From Date and Time :
+                      <div id="datetimepicker1" class="input-append">
+                        <input id="from-time" type="text"></input>
+                        <span class="add-on">
+                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                          </i>
+                        </span>
+                      </div>
+                    </span>
+                    &nbsp;&nbsp;&nbsp;
+                    <span id="date-select" class="span4">To Date and Time :
+                      <div id="datetimepicker2" class="input-append">
+                        <input id="to-time" type="text"></input>
+                        <span class="add-on">
+                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                          </i>
+                        </span>
+                      </div>
+                    </span>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="span4">
+                    <button id="submitBtn" class="btn btn-primary btn-small filter-btn">Submit</button>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="container content-starter">
-              <div class="row">
-                <div class="col-lg-12">
 
-                </div>
-              </div>
+          <div class="row" style="min-height:700px">
+            <div class="col-lg-12">
+              <iframe style="min-height:1200px" id="dashboardWidget-2" src="gadgets/log-viewer.jag?filekey=All&hostIP=All&fromTime=All&toTime=All" class="single-column-gadget"></iframe>
             </div>
-
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-12">
-
-
-                  <!--img border="25%"  src="logo-inside.png" alt="WSO2 Private PAAS" align="left" -->  
-
-                  <h1>BAM Log Client Logs</h1>
-
-                  <div class="container content-section">
-
-
-
-                    <div class="row">
-                      <div class="well topFilteringPanel">
-                       <div class="col-lg-12">
-
-
-                        <span class="span5">Select HostAddress :
-                          <select id="cluster-dd" name="basic-combo">
-                            <option>All</option>
-                          </select>
-                        </span>
-                        &nbsp;&nbsp;&nbsp;
-
-                        <span class="span5">Select FileKey :
-                          <select id="type-dd" name="basic-combo">
-                            <option>All</option>
-                          </select>
-                        </span>
-                        
-                        &nbsp;&nbsp;&nbsp;
-
-
-                        <span class="span2">Limit :
-                          <select id="limit-dd" name="basic-combo">
-                            <option>Def</option>
-                          </select>
-                        </span>
-                        
-                        &nbsp;&nbsp;&nbsp;
-
-                        <button id="clearSelectionBtn" class="btn btn-primary btn-small filter-btn">Clear</button>
-
-                      </div>
-                      <div class="col-lg-12">
-
-                        <span id="date-select" class="span5">From Date and Time :
-                          <div id="datetimepicker1" class="input-append">
-                            <input id="from-time" type="text"></input>
-                            <span class="add-on">
-                              <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                              </i>
-                            </span>
-                          </div>
-                        </span>
-                        &nbsp;&nbsp;&nbsp;
-                        <span id="date-select" class="span5">To Date and Time :
-                          <div id="datetimepicker2" class="input-append">
-                            <input id="to-time" type="text"></input>
-                            <span class="add-on">
-                              <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                              </i>
-                            </span>
-                          </div>
-                        </span>
-                        &nbsp;&nbsp;&nbsp;
-
-                        <button id="submitBtn" class="btn btn-primary btn-small filter-btn">Submit</button>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-                <div class="row" style="min-height:700px">
-                  <div class="col-lg-12">
-                    <iframe style="min-height:1200px" id="dashboardWidget-2" src="gadgets/log-viewer.jag?filekey=All&hostIP=All&fromTime=All&toTime=All" class="single-column-gadget"></iframe>
-                  </div>
-                </div>
+          </div>
 
                 <!--div class="pagination-centered">
                   <ul class="pagination">
@@ -167,34 +146,32 @@
 
               </div>
             </div>
-
+            <!-- /container -->
+            <div id="push"></div>
           </div>
-          <!-- /container -->
-          <div id="push"></div>
-        </div>
 
 
-        <footer id="footer">
-          <div class="container">
-            <p class="muted credit">&copy; WSO2 2014</p>
-          </div>
-        </footer>
+          <footer id="footer">
+            <div class="container">
+              <p class="muted credit">&copy; WSO2 2014</p>
+            </div>
+          </footer>
 
-        <input type="hidden" id="resource_type" value="Endpoint"/>
-        <input type="hidden" name="tenantId" id="tenantId" value= "<%=  session.getAttribute( "tenantId" )%>"/>
-        <input type="hidden" name="domainId" id="domainId" value= "<%=  session.getAttribute( "domain" )%>"/>
+          <input type="hidden" id="resource_type" value="Endpoint"/>
+          <input type="hidden" name="tenantId" id="tenantId" value= "<%=  session.getAttribute( "tenantId" )%>"/>
+          <input type="hidden" name="domainId" id="domainId" value= "<%=  session.getAttribute( "domain" )%>"/>
 
 
 
 
-        <script src="../resources/js/vendor/bootstrap.min.js"></script>
-        <script type="text/javascript" src="scripts/bootstrap-datetimepicker.min.js"></script>
-        <script src="../resources/js/vendor/jquery.validate.min.js"></script>
-        <script type="text/javascript" src="../resources/js/bamdashboard.js"></script>
-        <script type="text/javascript" src="scripts/bam.dashboard.main.js"></script>
-        <script type="text/javascript">
-        var currentTab = "WSO2 Private PAAS Metering";
-        </script>
-        <script type="text/javascript" src="../navigation.populator.js"></script>
-      </body>
-      </html>
+          <script src="../resources/js/vendor/bootstrap.min.js"></script>
+          <script type="text/javascript" src="scripts/bootstrap-datetimepicker.min.js"></script>
+          <script src="../resources/js/vendor/jquery.validate.min.js"></script>
+          <script type="text/javascript" src="../resources/js/bamdashboard.js"></script>
+          <script type="text/javascript" src="scripts/bam.dashboard.main.js"></script>
+          <script type="text/javascript">
+          var currentTab = "WSO2 Private PAAS Metering";
+          </script>
+          <script type="text/javascript" src="../navigation.populator.js"></script>
+        </body>
+        </html>
