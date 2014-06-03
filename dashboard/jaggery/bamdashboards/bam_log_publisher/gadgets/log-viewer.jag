@@ -88,8 +88,8 @@ if(hostIP != null ){
 
     //    log.info("\""+a.timestamp+"\"  : \""+b.timestamp+"\"");
 
-    var aDate = a.timestamp;
-    var bDate = b.timestamp;
+     var aDate = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(a.time).getTime();
+    var bDate = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(b.time).getTime();
 
    //     log.info("a = "+String(aDate)+" , b= "+String(bDate));
 

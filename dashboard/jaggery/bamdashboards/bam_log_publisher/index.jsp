@@ -10,7 +10,7 @@
   <link href="../resources/css/bootstrap.css" rel="stylesheet">
   <link href="../resources/css/bootstrap-theme.css" rel="stylesheet">
   <link href="../resources/css/bootstrap-missing.css" rel="stylesheet"> 
-  <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">  
+  <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet"> 
 
   <style>
   body {
@@ -19,6 +19,13 @@
     }.pagination-centered {
       text-align: center;
     }
+
+    .dropdown-menu {
+background: #FFFFFF !important;
+}
+.dropdown-menu li a {
+color: #1D0404 !important;
+}
 
     </style>
 
@@ -43,135 +50,120 @@
             </a>
           </div>
           <div class="navbar-collapse collapse main-menu-inside">
-            <ul class="nav navbar-nav pull-left menu1" id="leftnav"></ul>
-          </div>
+<!--             <ul class="nav navbar-nav pull-left menu1" id="leftnav"></ul>
+ -->          </div>
           <!--/.navbar-collapse -->
         </div>
       </div>
 
       <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
+        <div class="container content-starter" >
+          <div class="row">
+            <div class="col-lg-12">
+              <h1 style="font-size: 26px;"><i class="icon-cog"></i> BAM Log Client Logs</h1>
+            </div>
+          </div>
+        </div>
 
+        <div class="container content-section">
 
-            <!--img border="25%"  src="logo-inside.png" alt="WSO2 Private PAAS" align="left" -->  
+          <div class="col-lg-12 ">
 
-            <h1>BAM Log Client Logs</h1>
+            <div class="row">
+              <div class="col-xs-4">
+                <label for="query">Select a Host </label>
+                <select name="hostName" id="hostName" class="form-control">
+                  <option selected="selected" disabled="disabled">Select a Host Address</option>
+                  
+                  <option value="ALL">ALL</option>
+                  
+                  
+                </select>
+              </div>
+              <div class="col-xs-4">
+                <label for="query">Select a FileKey</label>
+                <select name="log" id="fileKey" class="form-control">
+                  <option selected="selected" disabled="disabled">All</option>
+                </select>
+              </div>
+              <div class="col-xs-4">
+                <label for="query">Max rows</label>
+                <select id="limit-dd" name="basic-combo">
+                  <option selected="selected" disabled="disabled">Select a Limit</option>
+                  <option value="ALL">ALL</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
 
-            <div class="container content-section">
+              <div class="col-xs-4">
+                <label for="query">Start time *</label>
+                <!--<input name="startTime" id="startTime" class="form-control" type="text" />-->
+                <div id="datetimepicker1" class="input-append datetimepicker" >
+                  <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text" name="startTime" id="from-time" class="form-control">
 
+                  <span class="add-on"> <i data-time-icon="icon-time" data-date-icon="icon-calendar"> </i> </span>
+                 <!--  <div class="help-block">
+                    MM/dd/yyyy HH:mm:ss PP
+                  </div> -->
 
-
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="well topFilteringPanel">
-                   <div class="row">
-                     <div class="col-lg-12">
-                      <span class="span4">Select HostAddress :
-                        <select id="cluster-dd" name="basic-combo">
-                          <option>All</option>
-                        </select>
-                      </span>
-                      &nbsp;&nbsp;&nbsp;
-
-                      <span class="span4">Select FileKey :
-                        <select id="type-dd" name="basic-combo">
-                          <option>All</option>
-                        </select>
-                      </span>
-
-                      &nbsp;&nbsp;&nbsp;
-
-
-                      <span class="span4">Limit :
-                        <select id="limit-dd" name="basic-combo">
-                          <option>Def</option>
-                        </select>
-                      </span>
-
-                      &nbsp;&nbsp;&nbsp;
-
-                      <button id="clearSelectionBtn" class="btn btn-primary btn-small filter-btn">Clear</button>
-                    </div>
-                  </div>
-                  <div class="row">
-                   <div class="col-lg-12">
-                    <span id="date-select" class="span4">From Date and Time :
-                      <div id="datetimepicker1" class="input-append">
-                        <input id="from-time" type="text"></input>
-                        <span class="add-on">
-                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                          </i>
-                        </span>
-                      </div>
-                    </span>
-                    &nbsp;&nbsp;&nbsp;
-                    <span id="date-select" class="span4">To Date and Time :
-                      <div id="datetimepicker2" class="input-append">
-                        <input id="to-time" type="text"></input>
-                        <span class="add-on">
-                          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                          </i>
-                        </span>
-                      </div>
-                    </span>
-                    &nbsp;&nbsp;&nbsp;
-                    <span class="span4">
-                    <button id="submitBtn" class="btn btn-primary btn-small filter-btn">Submit</button>
-                    </span>
-                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+              <div class="col-xs-4">
+                <label for="query">End time *</label>
+                <!--<input name="endTime" id="endTime" class="form-control" type="text" />-->
+                <div id="datetimepicker2" class="input-append datetimepicker">
+                  <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text" name="endTime" id="to-time" class="form-control">
 
-
-          <div class="row" style="min-height:700px">
-            <div class="col-lg-12">
-              <iframe style="min-height:1200px" id="dashboardWidget-2" src="gadgets/log-viewer.jag?filekey=All&hostIP=All&fromTime=All&toTime=All" class="single-column-gadget"></iframe>
-            </div>
-          </div>
-
-                <!--div class="pagination-centered">
-                  <ul class="pagination">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                  </ul>
-                </div-->
-
+                  <span class="add-on"> <i data-time-icon="icon-time" data-date-icon="icon-calendar"> </i> </span>
+                  <!-- <div class="help-block">
+                    MM/dd/yyyy HH:mm:ss PP
+                  </div> -->
+                </div>
               </div>
-            </div>
-            <!-- /container -->
-            <div id="push"></div>
+              <div class="col-xs-2">
+               <label for="query">Clear</label>
+               <button id="clearSelectionBtn" class="btn btn-primary btn-small filter-btn" style="float: left;">Clear</button>
+             </div>
+             <div class="col-xs-2">
+               <label for="query">Submit</label>
+               <button id="submitBtn" class="btn btn-primary btn-small filter-btn" style="float: left;">Submit</button>
+             </div>
+           </div>
+         </div>
+
+          <div class="row" style="min-height:700px; padding-top:10px;">
+          <div class="col-lg-12">
+            <iframe style="min-height:1200px" id="displayLogs" src="gadgets/log-viewer.jag?filekey=All&hostIP=All&fromTime=All&toTime=All" class="single-column-gadget"></iframe>
           </div>
+        </div>
+
+        <!-- /container -->
+        <div id="push"></div>
+      </div>
 
 
-          <footer id="footer">
-            <div class="container">
-              <p class="muted credit">&copy; WSO2 2014</p>
-            </div>
-          </footer>
+      <footer id="footer">
+        <div class="container">
+          <p class="muted credit">&copy; WSO2 2014</p>
+        </div>
+      </footer>
 
-          <input type="hidden" id="resource_type" value="Endpoint"/>
-          <input type="hidden" name="tenantId" id="tenantId" value= "<%=  session.getAttribute( "tenantId" )%>"/>
-          <input type="hidden" name="domainId" id="domainId" value= "<%=  session.getAttribute( "domain" )%>"/>
-
-
+      <input type="hidden" id="resource_type" value="Endpoint"/>
+      <input type="hidden" name="tenantId" id="tenantId" value= "<%=  session.getAttribute( "tenantId" )%>"/>
+      <input type="hidden" name="domainId" id="domainId" value= "<%=  session.getAttribute( "domain" )%>"/>
 
 
-          <script src="../resources/js/vendor/bootstrap.min.js"></script>
-          <script type="text/javascript" src="scripts/bootstrap-datetimepicker.min.js"></script>
-          <script src="../resources/js/vendor/jquery.validate.min.js"></script>
-          <script type="text/javascript" src="../resources/js/bamdashboard.js"></script>
-          <script type="text/javascript" src="scripts/bam.dashboard.main.js"></script>
-          <script type="text/javascript">
-          var currentTab = "WSO2 Private PAAS Metering";
-          </script>
-          <script type="text/javascript" src="../navigation.populator.js"></script>
-        </body>
-        </html>
+
+
+      <script src="../resources/js/vendor/bootstrap.min.js"></script>
+      <script type="text/javascript" src="scripts/bootstrap-datetimepicker.min.js"></script>
+      <script src="../resources/js/vendor/jquery.validate.min.js"></script>
+      <script type="text/javascript" src="../resources/js/bamdashboard.js"></script>
+      <script type="text/javascript" src="scripts/bam.dashboard.main.js"></script>
+      <script type="text/javascript">
+      var currentTab = "WSO2 Private PAAS Metering";
+      </script>
+      <script type="text/javascript" src="../navigation.populator.js"></script>
+    </body>
+    </html>

@@ -1,27 +1,26 @@
 $(function () {
     $('#datetimepicker1').datetimepicker({
-      format: 'MM/dd/yyyy hh:mm:ss',
       language: 'en',
       pick12HourFormat: true
     });
     $('#datetimepicker2').datetimepicker({
-      format: 'MM/dd/yyyy hh:mm:ss',
       language: 'en',
       pick12HourFormat: true
     });
 
-    $("#cluster-dd").change(function(){
-	    var selectedCluster = $("#cluster-dd option:selected").text();
+    $("#hostName").change(function(){
+	    var selectedCluster = $("#hostName option:selected").text();
 
-		if(selectedCluster==''){
+		if(selectedCluster=='All'){
 			triggerCollect();
 		}
         else{
+            triggerCollect();
             getInitialState(selectedCluster);
         }
 	});
 
-    $("#type-dd").change(function(){
+    $("#fileKey").change(function(){
       
         triggerCollect();
         
@@ -47,6 +46,17 @@ $(function () {
 
 
     $("#clearSelectionBtn").click(function(){
+
+        $('#hostName').prop('selectedIndex', 0);
+        $('#fileKey').prop('selectedIndex', 0);
+        $('#limit-dd').prop('selectedIndex', 0);
+
+        //clear date picker
+        var picker1 = $('#datetimepicker1').data('datetimepicker');
+        var picker2 = $('#datetimepicker2').data('datetimepicker');
+
+        picker1.setDate(null);
+        picker2.setDate(null);
    
     populateServicesCombo();
   
@@ -61,8 +71,8 @@ $(function () {
 
     $("#submitBtn").click(function(){
   
-    var sfilekey= $("#type-dd option:selected").text();
-    var shostIP=  $("#cluster-dd option:selected").text();
+    var sfilekey= $("#fileKey option:selected").text();
+    var shostIP=  $("#hostName option:selected").text();
     var sLimit =  $("#limit-dd option:selected").text();
     var sfromTime= document.getElementById("from-time").value;  
     var stoTime = document.getElementById("to-time").value;       
@@ -77,8 +87,8 @@ $(function () {
 
 function triggerCollect(){
 
-        var selectedFilekey = $("#type-dd option:selected").text();        
-        var selectedhostIP =  $("#cluster-dd option:selected").text();
+        var selectedFilekey = $("#fileKey option:selected").text();        
+        var selectedhostIP =  $("#hostName option:selected").text();
         var selectedLimit =  $("#limit-dd option:selected").text();
         var fromTime = document.getElementById("from-time").value;    
         var toTime = document.getElementById("to-time").value;      
@@ -96,7 +106,7 @@ function reloadIFrame(param){
     var limit = param.limit;
     
 
-    $("iframe").each(function(){
+    $("#displayLogs").each(function(){
       
         var currentUrl = $(this).attr("src");
         if(currentUrl.indexOf('?') != -1){
@@ -105,6 +115,8 @@ function reloadIFrame(param){
         }
         var newUrl = currentUrl+"?filekey="+filekey+"&hostIP="+hostIP+"&fromTime="+fromTime+"&toTime="+toTime+"&limit="+limit;
         $(this).attr('src',newUrl);
+// stop .each loop
+        return false;
     });
 };
 
@@ -144,8 +156,8 @@ function getInitialState(hostIP)
                     options = options + "<option>"+data[key]+"</option>"
                 }
             }
-            $("#type-dd").find('option').remove();
-            $("#type-dd").append(options);
+            $("#fileKey").find('option').remove();
+            $("#fileKey").append(options);
 
               
         }
@@ -172,8 +184,8 @@ function populateServicesCombo(){
 					options = options + "<option>"+data[key]+"</option>"
 				}
 			}
-            $("#cluster-dd").find('option').remove();
-            $("#cluster-dd").append(options);
+            $("#hostName").find('option').remove();
+            $("#hostName").append(options);
             
 		    triggerCollect();
   	    }
